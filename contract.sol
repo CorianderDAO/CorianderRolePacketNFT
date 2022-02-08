@@ -43,7 +43,7 @@ contract CorianderRulePacketV1 is ERC721URIStorage {
         }
     }
 
-    function mintPacket(address mintTo, string memory tokenURI, uint256 roleType) public returns (uint256) {
+    function mintPacket(address mintTo, uint256 roleType) public returns (uint256) {
         require (!adminVerify());
         if (roleType == 0) {
             _tokenIds.increment();
