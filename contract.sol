@@ -10,7 +10,6 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract CorianderRulePacketV1 is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
-    mapping (uint256 => string) private _tokenURIs;
 
     address public contractOwner;
     address[3] public admin;
@@ -23,51 +22,35 @@ contract CorianderRulePacketV1 is ERC721URIStorage {
             0x9e4F26D923e8952Fa43540d6D203cBCD9f1E9fAB
         ]; 
     }
-
-    function uri_src(uint8 roleType) private view returns (string memory) {
-        return string(
-            abi.encodePacked(
-                "https://raw.githubusercontent.com/CorianderDAO/CorianderRolePacketNFT/main/",
-                Strings.toString(roleType),
-                ".json"
-            )
-        );
-    }
     
-    function adminVerify() private returns (bool) {
+    function adminVerify() private view returns (bool) {
         for (uint i = 0; i < admin.length; i++) {
             if (admin[i] == msg.sender) {
                 return true;
             }
-            return false;
+        }
+        return false;
+    }
+
+    function mintItem(address mintTo, uint8 roleType) public {
+        require (adminVerify(), "You are not Admin");
+        if (roleType == 0) {
+            awardItem(mintTo, "https://raw.githubusercontent.com/CorianderDAO/CorianderRolePacketNFT/master/0.json");
+        }
+        else if (roleType == 1) {
+            awardItem(mintTo, "https://raw.githubusercontent.com/CorianderDAO/CorianderRolePacketNFT/master/1.json");
+        }
+        else if (roleType == 2) {
+            awardItem(mintTo, "https://raw.githubusercontent.com/CorianderDAO/CorianderRolePacketNFT/master/2.json");
         }
     }
 
-    function mintPacket(address mintTo, uint256 roleType) public returns (uint256) {
-        require (!adminVerify());
-        if (roleType == 0) {
-            _tokenIds.increment();
-            uint256 newItemId = _tokenIds.current();
-            _mint(mintTo, newItemId);
-            _setTokenURI(newItemId, uri_src(0));
-            return newItemId;
-        }
-        else if (roleType == 1) {
-            _tokenIds.increment();
-            uint256 newItemId = _tokenIds.current();
-            _mint(mintTo, newItemId);
-            _setTokenURI(newItemId, uri_src(1));
-            return newItemId;
-        }
-        else if (roleType == 2) {
-            _tokenIds.increment();
-            uint256 newItemId = _tokenIds.current();
-            _mint(mintTo, newItemId);
-            _setTokenURI(newItemId, uri_src(2));
-            return newItemId;
-        }
-        else {
-            return 88888;
-        }
+    function awardItem(address mintTo, string memory tokenURI) public returns (uint256) {
+        require (adminVerify(), "You are not Admin");
+        _tokenIds.increment();
+        uint256 newItemId = _tokenIds.current();
+        _mint(mintTo, newItemId);
+        _setTokenURI(newItemId, tokenURI);
+        return newItemId;
     }
 }
