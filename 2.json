@@ -1,0 +1,17 @@
+{
+    "description": "This certifies that the NFT holder have the WL role in Coriander DAO. The NFT holder will receive 0.088 ~ 0.01 MATIC AIRDROP at Feb-16,  2022 !!!", 
+    "external_url": "https://discord.gg/D3VTz4ppF9", 
+    "image": "https://raw.githubusercontent.com/CorianderDAO/CorianderRolePacketNFT/main/WL-LV2_ROLE_NFT.png", 
+    "name": "Coriander DAO WL Packet",
+    "attributes": [
+        {
+            "trait_type": "ROLE",
+            "value": "WL"
+        },
+        {
+            "display_type": "date", 
+            "trait_type": "Date of issue", 
+            "value": 1644365589
+        }
+    ]
+}
