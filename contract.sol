@@ -18,6 +18,7 @@ contract CorianderRulePacketV1 is ERC721URIStorage {
         uint8 roleCode;
         uint256 roleCount;
     }
+    uint256[3] public totalSupply;
     Role og;
     Role wl1;
     Role wl2;
@@ -30,6 +31,7 @@ contract CorianderRulePacketV1 is ERC721URIStorage {
             0x9e4F26D923e8952Fa43540d6D203cBCD9f1E9fAB,
             0xB457178C9091EDe6ce5b42ABE8D93F88Ef75a9b1
         ];
+        totalSupply = [88, 800, 1000];
         og = Role('OG', 0, 0);
         wl1 = Role('WL1', 1, 0);
         wl2 = Role('WL2', 2, 0);
@@ -46,17 +48,17 @@ contract CorianderRulePacketV1 is ERC721URIStorage {
 
     function mintItem(address mintTo, uint8 roleCode) public {
         if (roleCode == og.roleCode) {
-            require(og.roleCount<=88, "OG ROLE Packet is ALL Minted");
+            require(og.roleCount<=totalSupply[0], "OG ROLE Packet is ALL Minted");
             mintItemAttachOtherURI(mintTo, "https://raw.githubusercontent.com/CorianderDAO/CorianderRolePacketNFT/master/0.json");
             og.roleCount++;
         }
         else if (roleCode == wl1.roleCode) {
-            require(og.roleCount<=800, "OG ROLE Packet is ALL Minted");
+            require(og.roleCount<=totalSupply[1], "OG ROLE Packet is ALL Minted");
             mintItemAttachOtherURI(mintTo, "https://raw.githubusercontent.com/CorianderDAO/CorianderRolePacketNFT/master/1.json");
             wl1.roleCount++;
         }
         else if (roleCode == wl2.roleCode) {
-            require(og.roleCount<=1000, "OG ROLE Packet is ALL Minted");
+            require(og.roleCount<=totalSupply[2], "OG ROLE Packet is ALL Minted");
             mintItemAttachOtherURI(mintTo, "https://raw.githubusercontent.com/CorianderDAO/CorianderRolePacketNFT/master/2.json");
             wl2.roleCount++;
         }
