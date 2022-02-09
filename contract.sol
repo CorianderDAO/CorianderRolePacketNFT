@@ -53,12 +53,12 @@ contract CorianderRulePacketV1 is ERC721URIStorage {
             og.roleCount++;
         }
         else if (roleCode == wl1.roleCode) {
-            require(og.roleCount<=totalSupply[1], "OG ROLE Packet is ALL Minted");
+            require(og.roleCount<=totalSupply[1], "WL1 ROLE Packet is ALL Minted");
             mintItemAttachOtherURI(mintTo, "https://raw.githubusercontent.com/CorianderDAO/CorianderRolePacketNFT/master/1.json");
             wl1.roleCount++;
         }
         else if (roleCode == wl2.roleCode) {
-            require(og.roleCount<=totalSupply[2], "OG ROLE Packet is ALL Minted");
+            require(og.roleCount<=totalSupply[2], "WL2 ROLE Packet is ALL Minted");
             mintItemAttachOtherURI(mintTo, "https://raw.githubusercontent.com/CorianderDAO/CorianderRolePacketNFT/master/2.json");
             wl2.roleCount++;
         }
